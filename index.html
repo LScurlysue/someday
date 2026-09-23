@@ -74,6 +74,12 @@ main.wrap{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
 .chip{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 11px;font-size:13px;white-space:nowrap}
 .chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .chip.more{background:var(--surface2);border-color:transparent;font-weight:600;color:var(--accent)}
+.chips{position:relative}
+.cat-pop{position:absolute;left:0;right:0;top:calc(100% + 2px);z-index:15;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 32px rgba(40,20,60,.18);padding:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;animation:fade .2s ease}
+@media (min-width:600px){.cat-pop{grid-template-columns:repeat(5,1fr)}}
+.cat-tile{border:0;background:var(--surface2);border-radius:12px;padding:8px 4px;font-size:11.5px;font-weight:500;line-height:1.2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-align:center;min-height:60px}
+.cat-tile span{font-size:22px;line-height:1}
+.cat-tile.on{background:var(--ink);color:var(--bg)}
 .count{color:var(--muted);font-size:13px;margin:6px 0 10px}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
@@ -563,7 +569,7 @@ function renderExplore(){
     v.dataset.ready='1';
     $('#exSearch').addEventListener('input', e=>{ exQ=e.target.value.trim().toLowerCase(); drawGrid(); });
     $('#exSurprise').addEventListener('click', ()=>{ ddMode='ideas'; ddItem=null; go('daydream'); });
-    $('#exChips').addEventListener('click', e=>{ const b=e.target.closest('.chip'); if(!b) return; if(b.dataset.toggle){ chipsOpen=!chipsOpen; drawChips(); return; } exCat=b.dataset.cat; chipsOpen=false; drawChips(); drawGrid(); });
+    $('#exChips').addEventListener('click', e=>{ const b=e.target.closest('[data-cat],[data-toggle]'); if(!b) return; e.stopPropagation(); if(b.dataset.toggle){ chipsOpen=!chipsOpen; drawChips(); return; } exCat=b.dataset.cat; chipsOpen=false; drawChips(); drawGrid(); });
     $('#exGrid').addEventListener('click', e=>{
       const h=e.target.closest('[data-heart]');
       if(h){ e.stopPropagation(); toggleHeart(h.dataset.heart, h); return; }
@@ -575,11 +581,13 @@ function renderExplore(){
 let chipsOpen=false;
 function drawChips(){
   const cats=Object.entries(CATS).filter(([k])=>k!=='own');
-  const shown = chipsOpen ? cats : cats.filter(([k])=>k===exCat);
+  const sel = cats.filter(([k])=>k===exCat);
   $('#exChips').innerHTML = `<button class="chip ${exCat==='all'?'on':''}" data-cat="all">All</button>` +
-    shown.map(([k,c])=>`<button class="chip ${exCat===k?'on':''}" data-cat="${k}">${c.icon} ${esc(c.name)}</button>`).join('') +
-    `<button class="chip more" data-toggle="1" aria-expanded="${chipsOpen}">${chipsOpen?'Hide categories ▴':'☰ Categories ▾'}</button>`;
+    sel.map(([k,c])=>`<button class="chip on" data-cat="${k}">${c.icon} ${esc(c.name)}</button>`).join('') +
+    `<button class="chip more" data-toggle="1" aria-expanded="${chipsOpen}">${chipsOpen?'☰ Categories ▴':'☰ Categories ▾'}</button>` +
+    (chipsOpen ? `<div class="cat-pop">${cats.map(([k,c])=>`<button class="cat-tile ${exCat===k?'on':''}" data-cat="${k}"><span>${c.icon}</span>${esc(c.name)}</button>`).join('')}</div>` : '');
 }
+document.addEventListener('click', e=>{ if(chipsOpen && !e.target.closest('#exChips')){ chipsOpen=false; drawChips(); } });
 function drawGrid(){
   const items = CATALOG.filter(i => (exCat==='all'||i.cat===exCat) &&
     (!exQ || (i.title+' '+i.desc+' '+i.place+' '+CATS[i.cat].name).toLowerCase().includes(exQ)));
