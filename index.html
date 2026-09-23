@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Someday — my bucket list</title>
+<meta name="description" content="A bucket list for dreaming, visualising and manifesting.">
+<meta name="theme-color" content="#FBF6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#17131F" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Someday">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF6F1; --surface:#FFFFFF; --surface2:#F5EDF2; --ink:#2A2238; --muted:#7A7088; --line:#ECE2E9;
+  --accent:#8E5BB5; --accent-ink:#FFFFFF; --peach:#F2A07B; --gold:#C9962E; --gold-bg:#FBF1DC;
+  --grad:linear-gradient(135deg,#F6B89A 0%,#E7A6C8 50%,#B79CF0 100%);
+  --shadow:0 6px 22px rgba(70,40,90,.08);
+  --r:18px;
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#17131F; --surface:#221C2C; --surface2:#2B2437; --ink:#F3EDF7; --muted:#A99FB5; --line:#352C43;
+    --accent:#C3A0EA; --accent-ink:#1B1524; --gold:#E7C06A; --gold-bg:#3A3020; --shadow:0 6px 22px rgba(0,0,0,.35);}
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3{font-family:var(--serif);font-weight:650;margin:0;letter-spacing:-.01em}
+a{color:var(--accent)}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:calc(10px + env(safe-area-inset-top));padding-bottom:10px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.logo{width:38px;height:38px;border-radius:12px;background:var(--grad);display:grid;place-items:center;color:#fff;font-size:20px;flex:none}
+.brand h1{font-size:22px;line-height:1.1}
+.brand p{margin:0;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.icon-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;font-size:18px;flex:none}
+
+main{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+.view{display:none;padding-top:16px}
+.view.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.tabs .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.tab{border:0;background:none;padding:10px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:12px;font-weight:500}
+.tab .ti{font-size:20px;line-height:1}
+.tab.active{color:var(--accent)}
+.tab.active .ti{transform:scale(1.1)}
+
+.lead{font-family:var(--serif);font-size:24px;line-height:1.2;margin:4px 0 4px}
+.sub{color:var(--muted);margin:0 0 14px;font-size:15px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:9px 16px;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.grad{background:var(--grad);border:0;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.15)}
+.btn.ghost{background:transparent}
+.btn.danger{color:#C0392B;border-color:color-mix(in srgb,#C0392B 30%,var(--line))}
+.btn.small{padding:6px 12px;font-size:13px}
+.search{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 14px 12px 40px;font-size:16px;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' stroke='%23998fa8' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='8' cy='8' r='6'/%3E%3Cpath d='M13 13l4 4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:14px center}
+.search:focus,.field:focus{border-color:var(--accent)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 0 6px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 13px;font-size:14px;white-space:nowrap}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.count{color:var(--muted);font-size:13px;margin:6px 0 10px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;display:flex;flex-direction:column;text-align:left;padding:0}
+.art{height:92px;display:grid;place-items:center;font-size:42px;background:linear-gradient(135deg,var(--g1),var(--g2))}
+.card-body{padding:10px 12px 14px}
+.card h3{font-size:16px;line-height:1.2;margin-bottom:4px}
+.card p{margin:0;font-size:13px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.heart{position:absolute;top:8px;right:8px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#B64E7E;font-size:18px;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.12);transition:transform .15s}
+.heart.on{background:#E0558F;color:#fff}
+.heart:active{transform:scale(.88)}
+.pop{animation:pop .35s ease}
+@keyframes pop{50%{transform:scale(1.25)}}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 14px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-size:26px;line-height:1.1}
+.stat span{font-size:12px;color:var(--muted)}
+.stat.gold{background:var(--gold-bg);border-color:transparent}
+.stat.gold b{color:var(--gold)}
+.seg{display:flex;background:var(--surface2);border-radius:12px;padding:4px;gap:4px;margin:10px 0 12px}
+.seg button{flex:1;border:0;background:none;padding:8px 4px;border-radius:9px;font-size:13px;font-weight:600;color:var(--muted)}
+.seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.list{display:flex;flex-direction:column;gap:10px}
+.item{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px;cursor:pointer;text-align:left;width:100%}
+.thumb{width:58px;height:58px;border-radius:12px;flex:none;display:grid;place-items:center;font-size:28px;background:linear-gradient(135deg,var(--g1),var(--g2));background-size:cover;background-position:center}
+.item .t{font-weight:600;line-height:1.25}
+.item .m{font-size:13px;color:var(--muted);margin-top:2px}
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--surface2);color:var(--muted);margin-left:4px}
+.pill.planning{background:#E3EEFB;color:#2E6BB0}
+.pill.done{background:var(--gold-bg);color:var(--gold)}
+@media (prefers-color-scheme: dark){.pill.planning{background:#1F2F45;color:#8DBBF0}}
+.empty{text-align:center;padding:40px 16px;color:var(--muted)}
+.empty .big{font-size:44px}
+.quote-mini{background:var(--surface2);border-radius:16px;padding:14px 16px;margin-bottom:14px;font-family:var(--serif);font-style:italic;font-size:16px}
+.quote-mini small{display:block;font-family:var(--sans);font-style:normal;font-size:12px;color:var(--muted);margin-top:6px}
+
+.modes{margin-top:0}
+.dream{position:relative;border-radius:26px;overflow:hidden;min-height:430px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;background:linear-gradient(160deg,var(--g1),var(--g2));box-shadow:var(--shadow);background-size:cover;background-position:center}
+.dream::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,10,30,0) 20%,rgba(20,10,30,.55) 100%)}
+.dream > *{position:relative}
+.dream .emo{font-size:64px;line-height:1;margin-bottom:auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.15))}
+.dream .cat{font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.9;margin-top:24px}
+.dream h2{font-size:30px;line-height:1.1;margin:6px 0 8px;text-shadow:0 2px 12px rgba(0,0,0,.2)}
+.dream p{margin:0 0 12px;opacity:.95}
+.dream .imagine{background:rgba(255,255,255,.16);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:14px;padding:12px 14px;font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.4}
+.dream .links a{color:#fff;background:rgba(255,255,255,.18);text-decoration:none;border-radius:999px;padding:6px 11px;font-size:13px;font-weight:500}
+.dream .links{margin-top:12px}
+.dd-actions{display:flex;gap:10px;margin:14px 0}
+.dd-actions .btn{flex:1;justify-content:center;padding:12px}
+.timer{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;width:100%;text-align:left}
+.ring{--p:0;width:44px;height:44px;border-radius:50%;flex:none;display:grid;place-items:center;background:conic-gradient(var(--accent) calc(var(--p)*1%),var(--surface2) 0);font-size:13px;font-weight:600}
+.ring span{width:34px;height:34px;border-radius:50%;background:var(--surface);display:grid;place-items:center}
+
+.qhero{background:var(--grad);color:#fff;border-radius:24px;padding:26px 22px;box-shadow:var(--shadow)}
+.qhero .q{font-family:var(--serif);font-size:23px;line-height:1.3;font-style:italic}
+.qhero .s{margin-top:12px;font-size:13px;opacity:.95}
+.qlist{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.qitem{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start}
+.qitem .q{font-family:var(--serif);font-style:italic;flex:1}
+.qitem small{display:block;font-family:var(--sans);font-style:normal;color:var(--muted);font-size:12px;margin-top:4px}
+.x{border:0;background:none;color:var(--muted);font-size:18px;padding:0 4px}
+h2.sec{font-size:20px;margin:26px 0 6px}
+details summary{cursor:pointer;font-family:var(--serif);font-size:20px;font-weight:650;margin:26px 0 6px;list-style:none}
+details summary::after{content:" ▾";color:var(--muted);font-size:14px}
+
+.field{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:11px 13px;outline:none;font-size:16px}
+textarea.field{min-height:90px;resize:vertical;line-height:1.45}
+label.lbl{display:block;font-size:13px;font-weight:600;color:var(--muted);margin:14px 0 6px}
+
+.sheet-wrap{position:fixed;inset:0;z-index:50;background:rgba(20,12,30,.45);display:flex;align-items:flex-end;justify-content:center}
+.sheet-wrap[hidden]{display:none}
+.sheet{background:var(--bg);width:100%;max-width:760px;max-height:92vh;overflow-y:auto;border-radius:24px 24px 0 0;padding:8px 16px calc(24px + env(safe-area-inset-bottom));animation:up .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes up{from{transform:translateY(40px);opacity:.5}to{transform:none;opacity:1}}
+.grab{width:40px;height:5px;border-radius:3px;background:var(--line);margin:4px auto 10px}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.hero{border-radius:20px;height:150px;display:grid;place-items:center;font-size:64px;background:linear-gradient(135deg,var(--g1),var(--g2));background-size:cover;background-position:center;position:relative;overflow:hidden}
+.hero.photo{height:220px}
+.title-in{font-family:var(--serif);font-size:26px;font-weight:650;border:0;background:none;width:100%;padding:12px 0 2px;outline:none}
+.imagine-box{background:var(--surface2);border-radius:16px;padding:14px 16px;margin-top:14px}
+.imagine-box b{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.imagine-box p{margin:6px 0 0;font-family:var(--serif);font-style:italic;font-size:16px}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.links a{text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 12px;font-size:14px;color:var(--ink)}
+.status{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.status button{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 4px;font-size:13px;font-weight:600}
+.status button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.status button.on.done{background:var(--gold);border-color:var(--gold);color:#fff}
+.share-items{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.share-items label{display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.share-items input{width:20px;height:20px;accent-color:var(--accent)}
+.share-items .have{opacity:.55}
+.emoji-pick{display:flex;flex-wrap:wrap;gap:6px}
+.emoji-pick button{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-size:22px}
+.emoji-pick button.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.note{font-size:13px;color:var(--muted);margin-top:8px}
+
+#toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:calc(100% - 32px);text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%)}
+.sparkle{position:fixed;z-index:70;pointer-events:none;font-size:22px;animation:fly 1.2s ease-out forwards}
+@keyframes fly{to{transform:translate(var(--dx),var(--dy)) rotate(200deg);opacity:0}}
+@media (min-width:600px){.art{height:110px}.dream{min-height:480px}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div class="brand">
+    <div class="logo">✦</div>
+    <div style="min-width:0"><h1>Someday</h1><p id="hello">Your bucket list for dreaming big</p></div>
+  </div>
+  <button class="icon-btn" id="btnSettings" aria-label="Settings">⚙︎</button>
+</div></header>
+
+<main class="wrap">
+  <section class="view active" id="view-explore"></section>
+  <section class="view" id="view-list"></section>
+  <section class="view" id="view-daydream"></section>
+  <section class="view" id="view-quotes"></section>
+</main>
+
+<nav class="tabs"><div class="wrap">
+  <button class="tab active" data-view="explore"><span class="ti">✦</span>Explore</button>
+  <button class="tab" data-view="list"><span class="ti">♡</span>My list</button>
+  <button class="tab" data-view="daydream"><span class="ti">☁︎</span>Daydream</button>
+  <button class="tab" data-view="quotes"><span class="ti">❝</span>Quotes</button>
+</div></nav>
+
+<div class="sheet-wrap" id="sheetWrap" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true"></div></div>
+<div id="toast" role="status"></div>
+<input type="file" id="filePhoto" accept="image/*" hidden>
+<input type="file" id="fileImport" accept="application/json,.json" hidden>
+
+<script>
+// ============ CATEGORIES ============
+const CATS = {
+  cruise:{name:'Cruises & Trains',icon:'🚢',g:['#8EC5F0','#B7A6EE'],prompt:'Feel the gentle sway and hear the water or the rails. You are by the window with a warm drink, watching the view slide by. Who is sitting next to you?'},
+  nature:{name:'Wonders of Nature',icon:'🌋',g:['#7FCFB0','#8EB7EE'],prompt:'You are standing right there. Feel the air on your skin: cold, warm, misty? Take a slow breath. What can you hear?'},
+  cities:{name:'Cities to Live In',icon:'🥐',g:['#F6B89A','#E7A6C8'],prompt:'It is an ordinary morning and you live here. Open the map, find your street, walk to your bakery. What do you order? What does your window look out on?'},
+  beach:{name:'Islands & Beaches',icon:'🏝️',g:['#6FD3D9','#F7C98B'],prompt:'Warm sand under your feet, salt on your lips, the water exactly that turquoise. What are you wearing? What are you sipping?'},
+  animals:{name:'Animal Encounters',icon:'🐬',g:['#78C6E0','#9ED9B4'],prompt:'The moment it looks right at you. Feel your heart jump. Who is the first person you tell?'},
+  exp:{name:'Unforgettable Moments',icon:'🎈',g:['#F29CB3','#F7C98B'],prompt:'It is happening right now. Notice what you are wearing, who is with you, the photo you take and the warm feeling in your chest.'},
+  adv:{name:'Adventure',icon:'🪂',g:['#F4A36B','#E57A8E'],prompt:'You just did it. Feel the rush, the pride, the laugh. What do you say out loud?'},
+  food:{name:'Food & Wine',icon:'🍷',g:['#E99A8C','#C79BD8'],prompt:'Taste it slowly. The smell, the texture, the table, the view, the people laughing with you.'},
+  learn:{name:'Learn & Create',icon:'🎨',g:['#A9B8F5','#E7A6C8'],prompt:'It is a year from now and it feels natural. See yourself doing it with ease while someone asks, "How did you learn that?"'},
+  have:{name:'Dream Things',icon:'🕶️',g:['#F2C46D','#E99A8C'],prompt:'It is already yours. Hold it, feel the weight, the material, the smell of new. Where is the first place you take it?'},
+  home:{name:'Dream Home',icon:'🏡',g:['#A7D7A0','#F6C79B'],prompt:'You walk in and it is home. Where does the light fall? Walk slowly through every room. What does your morning look like here?'},
+  well:{name:'Body & Wellbeing',icon:'🧘',g:['#9ED9C4','#B7A6EE'],prompt:'Feel your body now: light, strong, rested. What does your day look like when you feel this good?'},
+  love:{name:'Family & Love',icon:'💞',g:['#F4A7B9','#F9CFA0'],prompt:'See their faces and hear the laughter. This is the memory you will talk about for years.'},
+  give:{name:'Give Back',icon:'🌳',g:['#98D39A','#8EC5F0'],prompt:'See the difference it made. Someone\'s face lights up. Feel the warmth of that.'},
+  become:{name:'Become & Achieve',icon:'🚀',g:['#B79CF0','#F29CB3'],prompt:'It is done. You have become this person. How do you walk into a room now? What does an ordinary Tuesday look like?'},
+  own:{name:'My own',icon:'✨',g:['#E7A6C8','#B79CF0'],prompt:'It is already real. See it, feel it, say thank you for it as if it has already happened.'}
+};
+
+// ============ CATALOGUE  (category|emoji|title|description|map place) ============
+const RAW = `
+cruise|🚢|Norwegian fjords cruise|Glide past waterfalls and tiny red villages deep in the fjords.|Geirangerfjord
+cruise|⛵|Greek islands by sailboat|Hop between Milos, Paros and Naxos with swim stops in hidden coves.|Cyclades
+cruise|🧊|Antarctica expedition cruise|Icebergs, penguins and the most remote continent on Earth.|Antarctic Peninsula
+cruise|🛳️|Transatlantic crossing on an ocean liner|Seven slow days at sea, ballroom evenings, arriving in New York by ship.|Southampton cruise terminal
+cruise|⛵|Croatian coast by gulet|Split, Hvar and Korčula from a wooden boat.|Hvar
+cruise|🌴|Caribbean island cruise|A new island and a new white beach every morning.|Caribbean Sea
+cruise|🏰|Danube river cruise|Vienna, Bratislava and Budapest from the water.|Budapest Parliament
+cruise|🌾|Nile cruise|The temples of Luxor and Aswan from a sailing boat.|Luxor Temple
+cruise|🐋|Alaska glacier cruise|Watch glaciers calve and whales breach.|Glacier Bay National Park
+cruise|🚂|Glacier Express|The "slowest express train in the world" from Zermatt to St. Moritz.|Zermatt
+cruise|🚂|Venice Simplon-Orient-Express|Art-deco carriages and dressing up for dinner on the way to Venice.|Venezia Santa Lucia
+cruise|🚞|Bernina Express|Over the Alps to Italy in panoramic carriages.|Brusio spiral viaduct
+cruise|🚆|Rocky Mountaineer|Glass-dome train through the Canadian Rockies.|Banff
+cruise|🚂|Jacobite steam train|Across the Glenfinnan Viaduct in the Scottish Highlands.|Glenfinnan Viaduct
+cruise|🚄|Japan by bullet train|Tokyo to Kyoto at 300 km/h with a bento on your lap.|Kyoto Station
+cruise|🚃|Cinque Terre by local train|Five colourful villages clinging to the cliffs.|Vernazza
+nature|🌌|Northern lights in Lapland|Watch the sky dance from a glass igloo.|Saariselkä
+nature|🐪|A night in the Sahara|Camel ride at sunset to a desert camp under a million stars.|Merzouga
+nature|🌋|Iceland's waterfalls and geysers|Gullfoss, Geysir and black-sand beaches.|Gullfoss
+nature|💧|Plitvice Lakes|Wooden paths over sixteen turquoise lakes.|Plitvice Lakes National Park
+nature|🏔️|The Matterhorn at sunrise|Watch the peak glow pink above Zermatt.|Matterhorn
+nature|🌊|Victoria Falls|"The smoke that thunders" on the Zambezi.|Victoria Falls
+nature|🌸|Cherry blossoms in Japan|A hanami picnic under pink trees in Kyoto.|Philosopher's Path Kyoto
+nature|🌷|Tulip fields in spring|Cycle through stripes of colour in Holland.|Keukenhof
+nature|💜|Lavender fields in Provence|Purple rows and sunflowers in July.|Valensole
+nature|⛰️|Dolomites road trip|Jagged peaks and green alpine meadows.|Seceda
+nature|🌅|Grand Canyon at sunset|The canyon turning red and gold.|Grand Canyon
+nature|🌿|Amazon rainforest|Sleep in a jungle lodge and hear the forest wake up.|Manaus
+nature|🏛️|Machu Picchu|The lost city of the Incas above the clouds.|Machu Picchu
+nature|🪸|Great Barrier Reef|Snorkel the largest reef on Earth.|Great Barrier Reef
+nature|🪞|Salar de Uyuni|Walk on the world's biggest natural mirror.|Salar de Uyuni
+nature|🍁|Autumn in New England|Red and gold forests, cider and cosy inns.|Stowe Vermont
+cities|🥐|A month in Paris|A croissant from the corner boulangerie in Le Marais.|Le Marais Paris
+cities|🍋|A summer in Lisbon|Tram 28, pastéis de nata and sunset at a miradouro.|Alfama Lisbon
+cities|🍝|Live in Rome for a while|Morning espresso standing at the bar in Trastevere.|Trastevere
+cities|🎨|Florence|Watch the Duomo glow from Piazzale Michelangelo.|Piazzale Michelangelo
+cities|🗽|New York in autumn|Central Park leaves, bagels and Broadway at night.|Central Park
+cities|🏯|Kyoto|Wooden teahouses and lantern-lit streets in Gion.|Gion Kyoto
+cities|🌆|Tokyo|Neon Shibuya nights and quiet shrines by day.|Shibuya Crossing
+cities|🕌|Istanbul|Tea overlooking the Bosphorus between two continents.|Galata Tower
+cities|🌞|Barcelona|Gaudí rooftops and tapas in El Born.|El Born Barcelona
+cities|🚲|Copenhagen|Cycle along the canals, cinnamon bun in Nyhavn.|Nyhavn
+cities|💃|Seville|Orange trees, flamenco and the Plaza de España.|Plaza de España Seville
+cities|🏙️|Dubai|The view from the top of the Burj Khalifa.|Burj Khalifa
+cities|🎻|Vienna|Coffee-house mornings and a night at the opera.|Café Central Vienna
+cities|⛰️|Cape Town|Table Mountain above, the ocean below.|Table Mountain
+cities|⛴️|Sydney|Harbour ferry past the Opera House.|Sydney Opera House
+cities|🌷|Amsterdam|A canal-house flat with flowers on the windowsill.|Jordaan Amsterdam
+cities|🍷|Bordeaux|Golden stone streets and the water mirror at dusk.|Miroir d'eau Bordeaux
+cities|🌊|Nice|Morning walk on the Promenade des Anglais.|Promenade des Anglais
+beach|🏝️|Maldives overwater villa|Step from your bed straight into the lagoon.|Maldives
+beach|🌅|Santorini sunset|Watch the sun sink from Oia's white terraces.|Oia
+beach|🐚|Seychelles|Giant granite boulders on a pink-sand beach.|Anse Source d'Argent
+beach|🌺|Bora Bora|Turquoise lagoon under Mount Otemanu.|Bora Bora
+beach|🌾|Bali|Rice terraces, temples and ocean sunsets.|Tegallalang Rice Terrace
+beach|🍋|Amalfi Coast|Lemon groves, cliffside villages and a boat to Capri.|Positano
+beach|⛵|Zanzibar|Spice markets and dhow boats at sunset.|Stone Town Zanzibar
+beach|🐢|Mauritius|Lagoons and a catamaran day to Île aux Cerfs.|Île aux Cerfs
+beach|🗿|Tulum|Mayan ruins right on a Caribbean beach.|Tulum Archaeological Site
+beach|💎|Sardinia|Water so clear the boats look like they float.|Costa Smeralda
+beach|🌈|Hawaii|The Road to Hana, volcanoes and surf.|Maui
+beach|🛶|Thai islands|A longtail boat to a limestone bay.|Phi Phi Islands
+beach|🌿|The Azores|Green volcanic islands in the middle of the Atlantic.|Sete Cidades
+beach|🏖️|Algarve cliffs|Golden rocks, sea caves and Benagil by kayak.|Benagil Cave
+animals|🐬|Swim with wild dolphins|In the open sea, the way they choose to swim with you.|Ponta Delgada
+animals|🐋|Whale watching|A humpback breaching right beside the boat.|Húsavík
+animals|🦁|African safari|The Big Five in the Serengeti.|Serengeti National Park
+animals|🐘|Ethical elephant sanctuary|Walk with rescued elephants in Thailand.|Chiang Mai
+animals|🐢|Swim with sea turtles|Snorkel beside them in the Red Sea.|Marsa Alam
+animals|🐧|Penguins on a beach|Boulders Beach near Cape Town.|Boulders Beach
+animals|🦒|Breakfast with giraffes|Giraffes poking their heads through the window in Nairobi.|Giraffe Manor
+animals|🦍|Mountain gorillas|Trek to meet a gorilla family in Rwanda.|Volcanoes National Park
+animals|🦘|Kangaroos and koalas|See them in the wild in Australia.|Kangaroo Island
+animals|🦈|Swim with whale sharks|Gentle giants in warm Mexican water.|Isla Holbox
+animals|🐎|Horse ride on a beach|Gallop along the shore at sunset.|
+animals|🦩|Flamingo lake|Thousands of pink birds at once.|Lake Nakuru
+animals|🐺|Husky sledding|Drive your own dog team through snowy forest.|Tromsø
+animals|🦌|Reindeer in Lapland|A sleigh ride with reindeer through the snow.|Rovaniemi
+exp|🎈|Hot-air balloon over Cappadocia|Float among hundreds of balloons at sunrise.|Göreme
+exp|🧊|Sleep in an ice hotel|Reindeer skins on a bed made of ice.|Icehotel Jukkasjärvi
+exp|🏎️|Monaco Grand Prix|Watch the cars scream past the harbour.|Monaco
+exp|🎭|Opera in the Verona Arena|Under the stars in a Roman amphitheatre.|Arena di Verona
+exp|🎆|New Year's Eve in Sydney|Fireworks over the harbour bridge.|Sydney Harbour Bridge
+exp|🎭|Venice Carnival|Masks, costumes and a ball in a palazzo.|Piazza San Marco
+exp|🍾|Champagne cellars in Reims|Tasting in chalk cellars under the city.|Reims
+exp|🥁|Rio Carnival|Samba parade in the Sambadrome.|Sambadrome Marquês de Sapucaí
+exp|🔭|Stargazing in the Atacama|The clearest night sky on the planet.|San Pedro de Atacama
+exp|🎤|Your favourite artist, front row|Singing every word with the crowd.|
+exp|🎬|Cannes during the film festival|Walk the Croisette in festival week.|La Croisette Cannes
+exp|♨️|Iceland's Blue Lagoon|Float in milky-blue geothermal water.|Blue Lagoon Iceland
+exp|🎿|Ski the Alps|Fresh snow, then fondue in a mountain hut.|Courchevel
+exp|🏰|Sleep in a real castle|A turret room and breakfast in the great hall.|
+exp|🕯️|Full-moon picnic on the beach|Blanket, candles and the sound of waves.|
+exp|🚁|Helicopter onto a glacier|Land and walk on the ice.|Fox Glacier
+exp|🎄|Christmas market magic|Mulled wine and lights in Strasbourg.|Strasbourg Christmas market
+exp|👗|A night at a gala|Dress up, dance and feel like a star.|
+adv|🪂|Skydive over the Alps|Freefall above the lakes of Interlaken.|Interlaken
+adv|🤿|Scuba-diving licence|Get certified and meet the reef up close.|Dahab
+adv|🏄|Learn to surf|Stand up on your first wave.|Ericeira
+adv|🧗|Via ferrata|Climb iron ladders along Dolomite cliffs.|Cortina d'Ampezzo
+adv|🥾|Camino de Santiago|Walk the last 100 km to Santiago.|Santiago de Compostela Cathedral
+adv|🏔️|Everest Base Camp trek|Walk among the highest mountains on Earth.|Everest Base Camp
+adv|🚣|Kayak among icebergs|Silent paddling in Greenland.|Ilulissat
+adv|🛣️|Route 66 road trip|Diners and desert from Chicago to LA.|
+adv|🚐|Iceland Ring Road|Circle the whole island in a camper van.|Ring Road Iceland
+adv|💎|Swim in a cenote|Crystal water inside a cave in Yucatán.|Cenote Ik Kil
+adv|🪁|Paragliding|Soar over the blue lagoon of Ölüdeniz.|Ölüdeniz
+adv|🏄‍♀️|Sunrise paddleboard|On a glassy alpine lake.|Lake Bled
+adv|🚗|Drive a coastal road in a convertible|Wind in your hair along the Amalfi coast.|Amalfi Drive
+adv|🌋|Hike a volcano|Watch the sunrise from the rim.|Mount Etna
+food|🍝|Pasta class in Italy|Learn from a nonna in Bologna.|Bologna
+food|🍷|Tuscan wine tasting|A cellar visit and a long lunch among the vines.|Chianti
+food|🍣|Omakase sushi in Tokyo|The chef slicing each piece just for you.|Ginza Tokyo
+food|⭐|A Michelin-star dinner|A tasting menu with a wine pairing.|
+food|🫕|Fondue in a Swiss chalet|Melted cheese after a day in the snow.|Gruyères
+food|🥐|Croissant class in Paris|Laminate dough like a French baker.|Paris
+food|🍫|Chocolate workshop in Brussels|Make pralines with a chocolatier.|Grand-Place Brussels
+food|🌮|Street food in Mexico City|Tacos al pastor at midnight.|Mexico City
+food|🫖|Afternoon tea in London|Scones, clotted cream and fine china.|London
+food|🍜|Night market in Bangkok|Sizzling woks and neon in Chinatown.|Yaowarat Road
+food|🫒|Olive harvest in Crete|Pick olives and taste the first oil.|Crete
+food|🍇|Grape harvest in Bordeaux|Help in a vineyard and toast the season.|Saint-Émilion
+food|🥂|Champagne on a yacht|Golden hour, bubbles and the open sea.|
+food|🍕|Real pizza in Naples|Where it was born.|Naples
+learn|🗣️|Speak a new language|Chat freely with locals.|
+learn|💃|Salsa or tango|Dance confidently at a milonga in Buenos Aires.|San Telmo Buenos Aires
+learn|🎹|Play the piano|Play one favourite song beautifully.|
+learn|🖌️|Watercolour painting|Paint the places you visit.|
+learn|🏺|Pottery|Throw a bowl on the wheel and use it every day.|
+learn|📸|Photography|Take photos worth hanging on the wall.|
+learn|⛵|Sailing licence|Skipper your own boat.|
+learn|🧘‍♀️|Yoga teacher training|A month of practice in India or Bali.|Rishikesh
+learn|🍳|Cook like a chef|Five dishes you can make without a recipe.|
+learn|🎤|Sing on a stage|A choir, a jazz night or a real concert.|
+learn|✍️|Write a book|Hold your own book in your hands.|
+learn|📱|Build an app|Launch something people use every day.|
+learn|🎻|Learn an instrument|Violin, guitar, cello… the one that moves you.|
+learn|🧵|Sew your own dress|Wear something you made yourself.|
+learn|🌱|Grow your own vegetables|Tomatoes warm from the sun.|
+have|🚗|Dream car|Pick the exact model and colour. Picture the first drive.|
+have|🕶️|Designer sunglasses|The pair that makes you feel like a film star.|
+have|👜|A luxury handbag|The one you have been looking at for years.|
+have|⌚|A beautiful watch|Something you will keep forever.|
+have|💍|Fine jewellery|A piece that sparkles every time you move.|
+have|👗|A made-to-measure dress|Cut perfectly for you.|
+have|👠|The perfect shoes|Beautiful and comfortable.|
+have|🛥️|A boat|Weekends on the water.|
+have|📷|A professional camera|For all the dream places you will see.|
+have|🎹|A grand piano|In a sunny room.|
+have|🧥|A cashmere coat|Soft, warm and timeless.|
+have|💐|Fresh flowers every week|Always something blooming at home.|
+have|✈️|Fly business class|Lie flat and wake up somewhere new.|
+have|💻|A dream workspace|The best laptop, a big screen, a beautiful desk.|
+home|🏡|A house with a garden|Morning coffee among your own roses.|
+home|🌊|A home with a sea view|Waking up to the sound of waves.|
+home|🏔️|A chalet in the mountains|Snow outside, fire inside.|
+home|☀️|A Mediterranean summer house|White walls, blue shutters, a lemon tree.|
+home|🛁|A bath by a big window|Candles and a view.|
+home|📚|A home library|A reading nook with a soft armchair.|
+home|🍽️|A dream kitchen|A big island, big windows and friends around it.|
+home|🪴|A terrace full of plants|Dinners outside on summer evenings.|
+home|🔥|A real fireplace|Winter evenings by the fire.|
+home|🏊|A swimming pool|A morning swim before breakfast.|
+home|🎨|A studio of your own|A room just for creating.|
+home|🐶|A dog|A loyal friend on every walk.|
+well|🏃‍♀️|Run a half marathon|Cross the finish line with your arms up.|
+well|🧖‍♀️|A week at a wellness retreat|Spa, sea air and deep sleep.|
+well|🌄|A morning ritual you love|Tea, stillness, stretching, gratitude.|
+well|💪|Feel strong|Your first real push-ups, your first pull-up.|
+well|🌊|Sea swims every summer morning|Cold, fresh and alive.|
+well|🌅|Watch 100 sunrises|One at a time, wherever you are.|
+well|📵|A digital-detox weekend|No phone, just nature and books.|
+well|🚶‍♀️|10,000 steps a day for a year|Walking your way to a new rhythm.|
+well|💆‍♀️|A monthly massage|A standing appointment with yourself.|
+well|🤫|A silent retreat|A few days of quiet to hear yourself.|
+well|🛌|Deep sleep every night|Waking up rested and bright.|
+love|💒|Renew your vows|In a special place, with the people you love.|
+love|👨‍👩‍👧|A big family holiday|Everyone together, three generations at one table.|
+love|🎂|An unforgettable birthday party|The one everyone talks about for years.|
+love|⛺|Camping under the stars|Marshmallows and stories with your child.|
+love|📖|A family photo book every year|Your best moments, printed and kept.|
+love|🌍|Show your child the world|Ten countries before they turn eighteen.|
+love|💌|Letters to your child|To open on their eighteenth birthday.|
+love|🍝|A weekly family dinner|A tradition everyone looks forward to.|
+love|👭|A trip with your best friends|Laughing until your stomach hurts.|
+love|🎁|Surprise someone with a dream trip|See their face when they find out.|
+love|💃|Dance at a family wedding|Until the very last song.|
+give|🤝|Volunteer abroad|Give your time where it matters.|
+give|🌳|Plant 100 trees|A small forest with your name on it.|
+give|🎓|Fund a child's education|Change a life for good.|
+give|🐾|Help an animal shelter|Walks, cuddles and a donation.|
+give|💝|Give generously|Donate to a cause you love, without hesitation.|
+give|🏫|Teach something for free|Share what you know with people who need it.|
+give|🍲|Cook for people in need|A warm meal made with love.|
+give|🧭|Mentor someone|Be the person you once needed.|
+become|💼|Your dream job|The role that makes Monday feel good.|
+become|🚀|Start your own business|Your idea, your name on the door.|
+become|💰|Financial freedom|Money that works for you.|
+become|🎙️|Speak on a stage|Share your story with a room full of people.|
+become|📲|An app with 10,000 users|Something you built, used every day.|
+become|🏆|Win an award|Hear your name called.|
+become|🌍|Work from anywhere|A laptop, a view and total freedom.|
+become|📰|Be featured in a magazine|Your story, in print.|
+become|🎓|Finish a course or degree|Hold the certificate in your hands.|
+become|🧭|Visit 50 countries|A passport full of stamps.|
+become|✨|A year of saying yes|To every good invitation that scares you a little.|
+become|🏠|Own your home|The key in your hand.|
+`;
+
+// ============ QUOTES (public-domain classics + original affirmations) ============
+const QUOTES = [
+  {t:'Dream lofty dreams, and as you dream, so shall you become.', s:'James Allen, As a Man Thinketh (1903)'},
+  {t:'Your Vision is the promise of what you shall one day be; your Ideal is the prophecy of what you shall at last unveil.', s:'James Allen, As a Man Thinketh (1903)'},
+  {t:'The dreamers are the saviours of the world.', s:'James Allen, As a Man Thinketh (1903)'},
+  {t:'Men do not attract that which they want, but that which they are.', s:'James Allen, As a Man Thinketh (1903)'},
+  {t:'Cherish your visions; cherish your ideals; cherish the music that stirs in your heart.', s:'James Allen, As a Man Thinketh (1903)'},
+  {t:'The very best thing you can do for the whole world is to make the most of yourself.', s:'Wallace D. Wattles, The Science of Getting Rich (1910)'},
+  {t:'Do, every day, all that can be done that day.', s:'Wallace D. Wattles, The Science of Getting Rich (1910)'},
+  {t:'You must form a clear and definite mental picture of what you want.', s:'Wallace D. Wattles, The Science of Getting Rich (1910)'},
+  {t:'The game of life is a game of boomerangs.', s:'Florence Scovel Shinn, The Game of Life and How to Play It (1925)'},
+  {t:'If one advances confidently in the direction of his dreams, and endeavors to live the life which he has imagined, he will meet with a success unexpected in common hours.', s:'Henry David Thoreau, Walden (1854)'},
+  {t:'Everything I desire is already on its way to me.', s:'Affirmation'},
+  {t:'I give myself permission to want big things.', s:'Affirmation'},
+  {t:'The world is full of beautiful places, and they are waiting for me.', s:'Affirmation'},
+  {t:'I live as if my dream has already come true.', s:'Affirmation'},
+  {t:'Money flows to me easily, and I spend it on joy.', s:'Affirmation'},
+  {t:'I am allowed to have it all: the adventure, the love, the calm.', s:'Affirmation'},
+  {t:'Every small step today is a ticket to somewhere wonderful.', s:'Affirmation'},
+  {t:'I say thank you in advance.', s:'Affirmation'},
+  {t:'My life is getting more beautiful every single day.', s:'Affirmation'},
+  {t:'I am the kind of person wonderful things happen to.', s:'Affirmation'},
+  {t:'I choose to feel now the way I will feel when it is here.', s:'Affirmation'},
+  {t:'Someday is today, one dream at a time.', s:'Affirmation'}
+];
+
+// ============ HELPERS ============
+const $ = (s, el=document) => el.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const slug = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+const enc = encodeURIComponent;
+const gvars = cat => { const c = CATS[cat] || CATS.own; return `--g1:${c.g[0]};--g2:${c.g[1]}`; };
+const pick = arr => arr[Math.floor(Math.random()*arr.length)];
+
+const CATALOG = RAW.trim().split('\n').map(line => {
+  const [cat, emoji, title, desc, place] = line.split('|');
+  return { id: slug(title), cat, emoji, title, desc, place: (place||'').trim() };
+});
+const BY_ID = Object.fromEntries(CATALOG.map(c => [c.id, c]));
+
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('show'),2200); }
+function sparkle(x, y){
+  const set=['✨','⭐','💫','🌟','✦'];
+  for(let i=0;i<14;i++){
+    const s=document.createElement('div'); s.className='sparkle'; s.textContent=pick(set);
+    s.style.left=x+'px'; s.style.top=y+'px';
+    s.style.setProperty('--dx',(Math.random()*240-120)+'px'); s.style.setProperty('--dy',(Math.random()*-220-40)+'px');
+    document.body.appendChild(s); setTimeout(()=>s.remove(),1300);
+  }
+}
+
+// ============ STORAGE ============
+const KEY='someday.v1';
+let memory=null;
+function load(){
+  try{ const raw=localStorage.getItem(KEY); if(raw) return JSON.parse(raw); }catch(e){}
+  return memory || { name:'', dreams:[], myQuotes:[] };
+}
+let S = load();
+S.dreams ||= []; S.myQuotes ||= [];
+function save(){
+  memory=S;
+  try{ localStorage.setItem(KEY, JSON.stringify(S)); }
+  catch(e){ toast('Could not save. Storage may be full (try smaller or fewer photos).'); }
+}
+const findByCatalog = id => S.dreams.find(d => d.catalogId === id);
+function newDream(src){
+  return { id:uid(), catalogId:src.catalogId||null, title:src.title||'', emoji:src.emoji||'✨', cat:src.cat||'own',
+    desc:src.desc||'', place:src.place||'', scene:'', note:'', link:'', photo:'', status:'dream', year:'', added:Date.now(), doneAt:null };
+}
+function addFromCatalog(item){
+  if(findByCatalog(item.id)) return findByCatalog(item.id);
+  const d=newDream({catalogId:item.id, title:item.title, emoji:item.emoji, cat:item.cat, desc:item.desc, place:item.place});
+  S.dreams.unshift(d); save(); return d;
+}
+const hasPersonal = d => d.scene || d.note || d.photo || d.link || d.status!=='dream';
+
+// ============ LINKS ============
+function linksHtml(d){
+  const q = d.place || d.title;
+  const out = [];
+  if(d.place) out.push(`<a href="https://www.google.com/maps/search/?api=1&query=${enc(d.place)}" target="_blank" rel="noopener">📍 Map & street view</a>`);
+  out.push(`<a href="https://www.google.com/search?tbm=isch&q=${enc(q)}" target="_blank" rel="noopener">🖼️ Photos</a>`);
+  out.push(`<a href="https://www.youtube.com/results?search_query=${enc(q+' 4K')}" target="_blank" rel="noopener">▶︎ Watch it</a>`);
+  out.push(`<a href="https://www.pinterest.com/search/pins/?q=${enc(d.title)}" target="_blank" rel="noopener">📌 Pinterest</a>`);
+  if(d.link) out.push(`<a href="${esc(d.link)}" target="_blank" rel="noopener">🏠 My place</a>`);
+  return out.join('');
+}
+
+// ============ QUOTES ============
+const allQuotes = () => [...QUOTES, ...S.myQuotes.map(q => ({t:q.t, s:q.s||'My quote', mine:true}))];
+function quoteOfDay(){ const all=allQuotes(); const day=Math.floor(Date.now()/864e5); return all[day % all.length]; }
+
+// ============ NAV ============
+let current='explore';
+function go(view){
+  current=view;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.view===view));
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active', v.id==='view-'+view));
+  render(); window.scrollTo({top:0});
+}
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>go(t.dataset.view)));
+function render(){
+  $('#hello').textContent = S.name ? `Hi ${S.name} ✦ what are you dreaming of today?` : 'Your bucket list for dreaming big';
+  ({explore:renderExplore, list:renderList, daydream:renderDaydream, quotes:renderQuotes})[current]();
+}
+
+// ============ EXPLORE ============
+let exCat='all', exQ='';
+function renderExplore(){
+  const v=$('#view-explore');
+  if(!v.dataset.ready){
+    v.innerHTML = `
+      <p class="lead">What makes your heart jump?</p>
+      <p class="sub">Scroll, dream, and tap ♡ on anything that sparks something. It goes straight to your list.</p>
+      <input class="search" id="exSearch" type="search" placeholder="Search: cruise, dolphins, Paris, piano…" autocomplete="off">
+      <div class="chips" id="exChips"></div>
+      <div class="row" style="justify-content:space-between"><div class="count" id="exCount"></div>
+        <button class="btn small ghost" id="exSurprise">🎲 Surprise me</button></div>
+      <div class="grid" id="exGrid"></div>`;
+    v.dataset.ready='1';
+    $('#exSearch').addEventListener('input', e=>{ exQ=e.target.value.trim().toLowerCase(); drawGrid(); });
+    $('#exSurprise').addEventListener('click', ()=>{ ddMode='ideas'; ddItem=null; go('daydream'); });
+    $('#exChips').addEventListener('click', e=>{ const b=e.target.closest('.chip'); if(!b) return; exCat=b.dataset.cat; drawChips(); drawGrid(); });
+    $('#exGrid').addEventListener('click', e=>{
+      const h=e.target.closest('[data-heart]');
+      if(h){ e.stopPropagation(); toggleHeart(h.dataset.heart, h); return; }
+      const c=e.target.closest('.card'); if(c) openCatalogSheet(BY_ID[c.dataset.id]);
+    });
+  }
+  drawChips(); drawGrid();
+}
+function drawChips(){
+  const cats=Object.entries(CATS).filter(([k])=>k!=='own');
+  $('#exChips').innerHTML = `<button class="chip ${exCat==='all'?'on':''}" data-cat="all">All</button>` +
+    cats.map(([k,c])=>`<button class="chip ${exCat===k?'on':''}" data-cat="${k}">${c.icon} ${esc(c.name)}</button>`).join('');
+}
+function drawGrid(){
+  const items = CATALOG.filter(i => (exCat==='all'||i.cat===exCat) &&
+    (!exQ || (i.title+' '+i.desc+' '+i.place+' '+CATS[i.cat].name).toLowerCase().includes(exQ)));
+  $('#exCount').textContent = `${items.length} idea${items.length===1?'':'s'}`;
+  $('#exGrid').innerHTML = items.length ? items.map(i=>{
+    const on=!!findByCatalog(i.id);
+    return `<div class="card" data-id="${i.id}" role="button" tabindex="0">
+      <div class="art" style="${gvars(i.cat)}">${i.emoji}</div>
+      <div class="card-body"><h3>${esc(i.title)}</h3><p>${esc(i.desc)}</p></div>
+      <button class="heart ${on?'on':''}" data-heart="${i.id}" aria-label="${on?'In your list':'Add to my list'}">${on?'♥':'♡'}</button>
+    </div>`;}).join('') : `<div class="empty" style="grid-column:1/-1"><div class="big">🔭</div>Nothing here yet. Add it as your own dream from <b>My list</b>.</div>`;
+}
+function toggleHeart(id, btn){
+  const item=BY_ID[id], have=findByCatalog(id);
+  if(have){
+    if(hasPersonal(have)){ openDreamSheet(have.id); return; }
+    S.dreams=S.dreams.filter(d=>d!==have); save(); toast('Removed from your list');
+  } else { addFromCatalog(item); toast('♥ Added to your list'); }
+  if(btn){ const on=!have; btn.classList.toggle('on',on); btn.textContent=on?'♥':'♡'; btn.classList.remove('pop'); void btn.offsetWidth; btn.classList.add('pop'); }
+}
+
+// ============ SHEET ============
+function openSheet(html, mount){
+  const sh=$('#sheet'); sh.innerHTML=`<div class="grab"></div>`+html; $('#sheetWrap').hidden=false; sh.scrollTop=0;
+  document.body.style.overflow='hidden'; mount && mount(sh);
+}
+function closeSheet(){ $('#sheetWrap').hidden=true; document.body.style.overflow=''; render(); }
+$('#sheetWrap').addEventListener('click', e=>{ if(e.target.id==='sheetWrap') closeSheet(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !$('#sheetWrap').hidden) closeSheet(); });
+
+function openCatalogSheet(item){
+  const have=findByCatalog(item.id);
+  openSheet(`
+    <div class="hero" style="${gvars(item.cat)}">${item.emoji}</div>
+    <div class="note" style="margin-top:12px">${CATS[item.cat].icon} ${esc(CATS[item.cat].name)}</div>
+    <h2 style="font-size:26px;margin:4px 0 6px">${esc(item.title)}</h2>
+    <p style="margin:0;color:var(--muted)">${esc(item.desc)}</p>
+    <div class="imagine-box"><b>Imagine it</b><p>${esc(CATS[item.cat].prompt)}</p></div>
+    <div class="links">${linksHtml(item)}</div>
+    <div class="row" style="margin-top:20px">
+      ${have ? `<button class="btn primary" id="cOpen">♥ Open in my list</button>` : `<button class="btn grad" id="cAdd">♡ Add to my list</button>`}
+      <button class="btn ghost" id="cClose">Close</button>
+    </div>`, sh=>{
+      $('#cClose',sh).onclick=closeSheet;
+      if(have) $('#cOpen',sh).onclick=()=>openDreamSheet(have.id);
+      else $('#cAdd',sh).onclick=e=>{ const d=addFromCatalog(item); const r=e.target.getBoundingClientRect(); sparkle(r.left+r.width/2,r.top); toast('♥ Added. Make it yours!'); openDreamSheet(d.id); };
+    });
+}
+
+const STATUS = [['dream','✧ Dreaming'],['planning','✈︎ Planning'],['done','✨ Manifested']];
+function openDreamSheet(id){
+  const d=S.dreams.find(x=>x.id===id); if(!d) return;
+  const catOpts=Object.entries(CATS).map(([k,c])=>`<option value="${k}" ${d.cat===k?'selected':''}>${c.icon} ${esc(c.name)}</option>`).join('');
+  const heroStyle = d.photo ? `background-image:url('${d.photo}')` : gvars(d.cat);
+  openSheet(`
+    <div class="sheet-head"><span class="note" style="margin:0">Changes save automatically</span><button class="btn small" id="dDone">Done</button></div>
+    <div class="hero ${d.photo?'photo':''}" id="dHero" style="${heroStyle}">${d.photo?'':esc(d.emoji)}</div>
+    <div class="row" style="margin-top:10px">
+      <button class="btn small" id="dPhoto">📷 ${d.photo?'Change photo':'Add a photo'}</button>
+      ${d.photo?'<button class="btn small ghost" id="dPhotoDel">Remove photo</button>':''}
+    </div>
+    <input class="title-in" id="dTitle" value="${esc(d.title)}" placeholder="My dream…" aria-label="Dream title">
+    ${d.desc?`<p style="margin:0 0 4px;color:var(--muted)">${esc(d.desc)}</p>`:''}
+
+    <label class="lbl">Where is this dream?</label>
+    <div class="status" id="dStatus">${STATUS.map(([k,l])=>`<button data-s="${k}" class="${d.status===k?'on':''} ${k==='done'?'done':''}">${l}</button>`).join('')}</div>
+
+    <div class="imagine-box"><b>Imagine it</b><p>${esc((CATS[d.cat]||CATS.own).prompt)}</p></div>
+    <label class="lbl">My scene: write it as if it has already happened</label>
+    <textarea class="field" id="dScene" placeholder="I'm sitting at a little café on my street, the smell of fresh bread…">${esc(d.scene)}</textarea>
+
+    <label class="lbl">See it</label>
+    <div class="links" style="margin-top:0">${linksHtml(d)}</div>
+
+    <label class="lbl">My street, café or exact place (paste a Google Maps / Street View link)</label>
+    <input class="field" id="dLink" type="url" inputmode="url" placeholder="https://maps.app.goo.gl/…" value="${esc(d.link)}">
+    <label class="lbl">Place to search on the map</label>
+    <input class="field" id="dPlace" placeholder="e.g. Rua da Bica, Lisbon" value="${esc(d.place)}">
+
+    <label class="lbl">Details: which model, which colour, why it matters</label>
+    <textarea class="field" id="dNote" placeholder="Yellow, cream leather seats, the first drive along the coast…">${esc(d.note)}</textarea>
+
+    <div class="row" style="gap:10px">
+      <div style="flex:1;min-width:140px"><label class="lbl">Category</label><select class="field" id="dCat">${catOpts}</select></div>
+      <div style="width:120px"><label class="lbl">By (year)</label><input class="field" id="dYear" inputmode="numeric" maxlength="4" placeholder="2027" value="${esc(d.year)}"></div>
+    </div>
+    ${d.doneAt?`<p class="note">✨ Manifested on ${new Date(d.doneAt).toLocaleDateString()}</p>`:''}
+    <div class="row" style="margin-top:22px;justify-content:space-between">
+      <button class="btn danger small" id="dDel">Delete dream</button>
+      <button class="btn primary" id="dDone2">Done</button>
+    </div>`, sh=>{
+      const bind=(sel,key,after)=>$(sel,sh).addEventListener('input',e=>{ d[key]=e.target.value; save(); after&&after(); });
+      bind('#dTitle','title'); bind('#dScene','scene'); bind('#dNote','note'); bind('#dLink','link'); bind('#dPlace','place'); bind('#dYear','year');
+      $('#dCat',sh).addEventListener('change',e=>{ d.cat=e.target.value; save(); openDreamSheet(d.id); });
+      $('#dLink',sh).addEventListener('change',()=>openDreamSheet(d.id));
+      $('#dPlace',sh).addEventListener('change',()=>openDreamSheet(d.id));
+      $('#dStatus',sh).addEventListener('click',e=>{
+        const b=e.target.closest('button'); if(!b) return;
+        const was=d.status; d.status=b.dataset.s; d.doneAt = d.status==='done' ? (d.doneAt||Date.now()) : null; save();
+        if(d.status==='done' && was!=='done'){ const r=b.getBoundingClientRect(); sparkle(r.left+r.width/2,r.top); toast('✨ Manifested! Congratulations!'); }
+        openDreamSheet(d.id);
+      });
+      $('#dPhoto',sh).onclick=()=>{ photoTarget=d.id; $('#filePhoto').click(); };
+      if(d.photo) $('#dPhotoDel',sh).onclick=()=>{ d.photo=''; save(); openDreamSheet(d.id); };
+      $('#dDel',sh).onclick=()=>{ if(confirm('Delete this dream?')){ S.dreams=S.dreams.filter(x=>x.id!==d.id); save(); closeSheet(); toast('Dream deleted'); } };
+      $('#dDone',sh).onclick=closeSheet; $('#dDone2',sh).onclick=closeSheet;
+    });
+}
+
+let photoTarget=null;
+$('#filePhoto').addEventListener('change', async e=>{
+  const f=e.target.files[0]; e.target.value=''; if(!f||!photoTarget) return;
+  try{
+    const data=await shrinkPhoto(f); const d=S.dreams.find(x=>x.id===photoTarget);
+    if(d){ d.photo=data; save(); openDreamSheet(d.id); }
+  }catch(err){ toast('Could not read that photo'); }
+});
+function shrinkPhoto(file){
+  return new Promise((res,rej)=>{
+    const img=new Image(), url=URL.createObjectURL(file);
+    img.onload=()=>{ const max=900, r=Math.min(1,max/Math.max(img.width,img.height));
+      const c=document.createElement('canvas'); c.width=Math.round(img.width*r); c.height=Math.round(img.height*r);
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg',0.72)); };
+    img.onerror=()=>{ URL.revokeObjectURL(url); rej(); }; img.src=url;
+  });
+}
+
+const EMOJIS=['✨','🚗','🕶️','👜','💍','🏡','✈️','🌴','🗼','🎓','💼','💰','🐶','🎹','🌸','💃','🛥️','📚','🧘','❤️'];
+function openNewDream(){
+  let emoji='✨', cat='own';
+  openSheet(`
+    <h2 style="font-size:24px;margin-bottom:4px">A dream of my own</h2>
+    <p class="sub">Anything at all: a yellow Mercedes, a flat in Paris, a feeling.</p>
+    <label class="lbl">My dream</label>
+    <input class="field" id="nTitle" placeholder="A yellow Mercedes convertible" autofocus>
+    <label class="lbl">Pick a symbol</label>
+    <div class="emoji-pick" id="nEmoji">${EMOJIS.map((e,i)=>`<button data-e="${e}" class="${i===0?'on':''}">${e}</button>`).join('')}</div>
+    <label class="lbl">Category</label>
+    <select class="field" id="nCat">${Object.entries(CATS).map(([k,c])=>`<option value="${k}" ${k==='own'?'selected':''}>${c.icon} ${esc(c.name)}</option>`).join('')}</select>
+    <div class="row" style="margin-top:20px"><button class="btn grad" id="nSave">Add to my list</button><button class="btn ghost" id="nCancel">Cancel</button></div>`, sh=>{
+      $('#nEmoji',sh).addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; emoji=b.dataset.e; sh.querySelectorAll('#nEmoji button').forEach(x=>x.classList.toggle('on',x===b)); });
+      $('#nCat',sh).addEventListener('change',e=>cat=e.target.value);
+      $('#nCancel',sh).onclick=closeSheet;
+      $('#nSave',sh).onclick=e=>{
+        const t=$('#nTitle',sh).value.trim(); if(!t){ $('#nTitle',sh).focus(); return; }
+        const d=newDream({title:t, emoji, cat}); S.dreams.unshift(d); save();
+        const r=e.target.getBoundingClientRect(); sparkle(r.left+r.width/2,r.top); openDreamSheet(d.id);
+      };
+      setTimeout(()=>$('#nTitle',sh).focus(),250);
+    });
+}
+
+// ============ MY LIST ============
+let listFilter='all';
+function renderList(){
+  const v=$('#view-list'); const q=quoteOfDay();
+  const n=S.dreams.length, planning=S.dreams.filter(d=>d.status==='planning').length, done=S.dreams.filter(d=>d.status==='done').length;
+  const items=S.dreams.filter(d=>listFilter==='all'||d.status===listFilter)
+    .sort((a,b)=> listFilter==='done' ? (b.doneAt||0)-(a.doneAt||0) : (b.added||0)-(a.added||0));
+  v.innerHTML = `
+    <div class="quote-mini">“${esc(q.t)}”<small>${esc(q.s)}</small></div>
+    <div class="stats">
+      <div class="stat"><b>${n}</b><span>dreams</span></div>
+      <div class="stat"><b>${planning}</b><span>planning</span></div>
+      <div class="stat gold"><b>${done}</b><span>manifested ✨</span></div>
+    </div>
+    <div class="row"><button class="btn grad" id="lNew">＋ My own dream</button><button class="btn" id="lShare">↗ Share my list</button></div>
+    <div class="seg" id="lSeg">${[['all','All'],...STATUS.map(([k,l])=>[k,l])].map(([k,l])=>`<button data-f="${k}" class="${listFilter===k?'on':''}">${l}</button>`).join('')}</div>
+    <div class="list" id="lList">${items.length ? items.map(d=>`
+      <button class="item" data-id="${d.id}">
+        <div class="thumb" style="${d.photo?`background-image:url('${d.photo}')`:gvars(d.cat)}">${d.photo?'':esc(d.emoji)}</div>
+        <div style="min-width:0;flex:1"><div class="t">${esc(d.title)||'Untitled dream'}</div>
+          <div class="m">${esc((CATS[d.cat]||CATS.own).name)}${d.year?' · '+esc(d.year):''}
+          ${d.status!=='dream'?`<span class="pill ${d.status}">${d.status==='done'?'✨ Manifested':'✈︎ Planning'}</span>`:''}</div></div>
+      </button>`).join('') : `<div class="empty"><div class="big">${n?'🌙':'♡'}</div>${n?'Nothing in this section yet.':'Your list is empty for now.<br>Go to <b>Explore</b> and tap ♡ on what inspires you, or add a dream of your own.'}</div>`}
+    </div>`;
+  $('#lNew').onclick=openNewDream;
+  $('#lShare').onclick=openShare;
+  $('#lSeg').onclick=e=>{ const b=e.target.closest('button'); if(!b) return; listFilter=b.dataset.f; renderList(); };
+  $('#lList').onclick=e=>{ const b=e.target.closest('.item'); if(b) openDreamSheet(b.dataset.id); };
+}
+
+// ============ DAYDREAM ============
+let ddMode='mix', ddItem=null, ddLast=null, timer=null;
+function ddPool(){
+  const mine=S.dreams.filter(d=>d.status!=='done').map(d=>({kind:'mine', d}));
+  const ideas=CATALOG.filter(c=>!findByCatalog(c.id)).map(c=>({kind:'idea', d:c}));
+  if(ddMode==='mine') return mine;
+  if(ddMode==='ideas') return ideas;
+  return [...mine, ...mine, ...ideas]; // your own dreams show up a bit more often
+}
+function ddNext(){
+  const pool=ddPool(); if(!pool.length){ ddItem=null; return; }
+  let n=0, it; do{ it=pick(pool); n++; }while(pool.length>1 && ddLast && it.d.id===ddLast && n<10);
+  ddItem=it; ddLast=it.d.id;
+}
+function renderDaydream(){
+  stopTimer();
+  if(!ddItem || (ddItem.kind==='mine' && !S.dreams.includes(ddItem.d))) ddNext();
+  const v=$('#view-daydream'), q=pick(allQuotes());
+  const modes=[['mix','Mix'],['mine','My dreams'],['ideas','New ideas']];
+  let card;
+  if(!ddItem){
+    card=`<div class="empty"><div class="big">☁︎</div>${ddMode==='mine'?'Add some dreams to your list first, then come back to daydream about them.':'You have added every idea! Time to write your own.'}</div>`;
+  } else {
+    const d=ddItem.d, mine=ddItem.kind==='mine', c=CATS[d.cat]||CATS.own;
+    const style = mine && d.photo ? `background-image:url('${d.photo}')` : gvars(d.cat);
+    card=`<div class="dream" style="${style}">
+      <div class="emo">${mine&&d.photo?'':esc(d.emoji)}</div>
+      <div class="cat">${c.icon} ${esc(c.name)}${mine?' · my dream':''}</div>
+      <h2>${esc(d.title)}</h2>
+      ${d.desc?`<p>${esc(d.desc)}</p>`:''}
+      <div class="imagine">${mine&&d.scene?esc(d.scene):esc(c.prompt)}</div>
+      <div class="links">${linksHtml(d)}</div>
+    </div>
+    <div class="dd-actions">
+      ${mine?`<button class="btn" id="ddOpen">✎ Open</button>`:`<button class="btn" id="ddAdd">♡ Add to my list</button>`}
+      <button class="btn primary" id="ddNext">Next ✨</button>
+    </div>
+    <button class="timer" id="ddTimer"><div class="ring" id="ring"><span id="ringN">60</span></div>
+      <div><b>Stay here for 60 seconds</b><div class="note" style="margin:0" id="timerTxt">Close your eyes, picture it, and feel it as if it's already yours.</div></div></button>`;
+  }
+  v.innerHTML=`
+    <p class="lead">Daydream</p>
+    <p class="sub">One dream at a time. No planning, just imagining.</p>
+    <div class="seg modes" id="ddModes">${modes.map(([k,l])=>`<button data-m="${k}" class="${ddMode===k?'on':''}">${l}</button>`).join('')}</div>
+    ${card}
+    <div class="quote-mini" style="margin-top:16px">“${esc(q.t)}”<small>${esc(q.s)}</small></div>`;
+  $('#ddModes').onclick=e=>{ const b=e.target.closest('button'); if(!b) return; ddMode=b.dataset.m; ddItem=null; renderDaydream(); };
+  if(!ddItem) return;
+  $('#ddNext').onclick=()=>{ ddNext(); renderDaydream(); };
+  if($('#ddOpen')) $('#ddOpen').onclick=()=>openDreamSheet(ddItem.d.id);
+  if($('#ddAdd')) $('#ddAdd').onclick=e=>{ addFromCatalog(ddItem.d); const r=e.target.getBoundingClientRect(); sparkle(r.left+r.width/2,r.top); toast('♥ Added to your list'); e.target.textContent='♥ In your list'; e.target.disabled=true; };
+  $('#ddTimer').onclick=startTimer;
+}
+function startTimer(){
+  if(timer) return;
+  const total=60, start=Date.now();
+  $('#timerTxt').textContent='Breathe slowly. See it, hear it, feel it…';
+  timer=setInterval(()=>{
+    const left=Math.max(0, total-Math.floor((Date.now()-start)/1000));
+    const ring=$('#ring'); if(!ring){ stopTimer(); return; }
+    ring.style.setProperty('--p', ((total-left)/total*100).toFixed(1)); $('#ringN').textContent=left;
+    if(left===0){ stopTimer(); $('#ringN').textContent='✓'; $('#timerTxt').textContent='Beautiful. Carry this feeling with you today. ✨';
+      const r=ring.getBoundingClientRect(); sparkle(r.left+22,r.top); }
+  }, 250);
+}
+function stopTimer(){ clearInterval(timer); timer=null; }
+
+// ============ QUOTES VIEW ============
+let heroQuote=null;
+function renderQuotes(){
+  const v=$('#view-quotes'); const q=heroQuote||quoteOfDay();
+  v.innerHTML=`
+    <div class="qhero"><div class="note" style="color:#fff;opacity:.9;margin:0 0 8px">${heroQuote?'A quote for you':'Quote of the day'}</div>
+      <div class="q">“${esc(q.t)}”</div><div class="s">${esc(q.s)}</div></div>
+    <div class="row" style="margin-top:12px"><button class="btn" id="qAnother">↻ Another one</button></div>
+
+    <h2 class="sec">My quotes</h2>
+    <p class="sub">Save lines from your favourite books so they show up in Daydream and as quote of the day.</p>
+    <textarea class="field" id="qText" placeholder="Write or paste a quote that moves you…" style="min-height:70px"></textarea>
+    <div class="row" style="margin-top:8px"><input class="field" id="qSrc" placeholder="Book / author (optional)" style="flex:1;min-width:160px"><button class="btn primary" id="qAdd">Save</button></div>
+    <div class="qlist" id="qMine">${S.myQuotes.map((m,i)=>`<div class="qitem"><div class="q">“${esc(m.t)}”${m.s?`<small>${esc(m.s)}</small>`:''}</div><button class="x" data-i="${i}" aria-label="Delete">×</button></div>`).join('')}</div>
+
+    <details><summary>Classic wisdom &amp; affirmations</summary>
+      <div class="qlist">${QUOTES.map(m=>`<div class="qitem"><div class="q">“${esc(m.t)}”<small>${esc(m.s)}</small></div></div>`).join('')}</div>
+    </details>`;
+  $('#qAnother').onclick=()=>{ const all=allQuotes(); let n; do{ n=pick(all);}while(all.length>1 && n===(heroQuote||q)); heroQuote=n; renderQuotes(); };
+  $('#qAdd').onclick=()=>{ const t=$('#qText').value.trim(); if(!t){ $('#qText').focus(); return; } S.myQuotes.unshift({t, s:$('#qSrc').value.trim()}); save(); toast('Quote saved'); renderQuotes(); };
+  $('#qMine').onclick=e=>{ const b=e.target.closest('[data-i]'); if(!b) return; S.myQuotes.splice(+b.dataset.i,1); save(); renderQuotes(); };
+}
+
+// ============ SHARING ============
+function b64u(bytes){ let s=''; for(let i=0;i<bytes.length;i+=0x8000) s+=String.fromCharCode.apply(null, bytes.subarray(i,i+0x8000)); return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+function unb64u(str){ const s=atob(str.replace(/-/g,'+').replace(/_/g,'/')); const b=new Uint8Array(s.length); for(let i=0;i<s.length;i++) b[i]=s.charCodeAt(i); return b; }
+async function buildShareLink(){
+  const items=S.dreams.map(d=> d.catalogId && BY_ID[d.catalogId] && d.title===BY_ID[d.catalogId].title ? d.catalogId : [d.cat, d.emoji, d.title, d.desc||'', d.place||'']);
+  const json=JSON.stringify({n:S.name||'', d:items});
+  let code;
+  try{
+    if(!('CompressionStream' in window)) throw 0;
+    const stream=new Blob([json]).stream().pipeThrough(new CompressionStream('deflate-raw'));
+    code='z'+b64u(new Uint8Array(await new Response(stream).arrayBuffer()));
+  }catch(e){ code='j'+b64u(new TextEncoder().encode(json)); }
+  return location.href.split('#')[0]+'#s='+code;
+}
+async function readShareCode(code){
+  const bytes=unb64u(code.slice(1));
+  let json;
+  if(code[0]==='z'){ const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw')); json=await new Response(stream).text(); }
+  else json=new TextDecoder().decode(bytes);
+  const data=JSON.parse(json);
+  return { name:data.n||'', items:(data.d||[]).map(x=> typeof x==='string' ? (BY_ID[x] ? {...BY_ID[x], catalogId:x} : null)
+      : {cat:CATS[x[0]]?x[0]:'own', emoji:x[1]||'✨', title:x[2]||'', desc:x[3]||'', place:x[4]||''}).filter(x=>x&&x.title) };
+}
+async function openShare(){
+  if(!S.dreams.length){ toast('Add a few dreams first ♡'); return; }
+  const link=await buildShareLink();
+  const local=!/^https?:/.test(location.protocol);
+  openSheet(`
+    <h2 style="font-size:24px;margin-bottom:4px">Share my list</h2>
+    <p class="sub">Friends see your ${S.dreams.length} dream${S.dreams.length===1?'':'s'} and tick the ones they want for their own list. Your scenes, notes and photos stay private.</p>
+    ${!S.name?`<label class="lbl">Your name (shown to friends)</label><input class="field" id="shName" placeholder="Liliia">`:''}
+    <label class="lbl">Link</label>
+    <input class="field" id="shLink" readonly value="${esc(link)}">
+    ${local?'<p class="note">⚠︎ The app is opened as a local file, so this link will only work once the app is online (e.g. on GitHub Pages).</p>':''}
+    <div class="row" style="margin-top:14px">
+      ${navigator.share?'<button class="btn grad" id="shShare">↗ Share</button>':''}
+      <button class="btn primary" id="shCopy">Copy link</button><button class="btn ghost" id="shClose">Close</button>
+    </div>`, sh=>{
+      const refresh=async()=>{ $('#shLink',sh).value=await buildShareLink(); };
+      if($('#shName',sh)) $('#shName',sh).addEventListener('change',e=>{ S.name=e.target.value.trim(); save(); refresh(); });
+      $('#shCopy',sh).onclick=async()=>{ const l=$('#shLink',sh).value; try{ await navigator.clipboard.writeText(l); toast('Link copied ✓'); }catch(e){ $('#shLink',sh).select(); document.execCommand('copy'); toast('Link copied ✓'); } };
+      if($('#shShare',sh)) $('#shShare',sh).onclick=()=>navigator.share({title:(S.name?S.name+"'s":'My')+' bucket list', text:'My dream list. Take the ones you love for your own list ✨', url:$('#shLink',sh).value}).catch(()=>{});
+      $('#shClose',sh).onclick=closeSheet;
+    });
+}
+async function checkIncomingShare(){
+  const m=location.hash.match(/#s=([\w-]+)/); if(!m) return;
+  history.replaceState(null,'',location.pathname+location.search);
+  let data; try{ data=await readShareCode(m[1]); }catch(e){ toast('That shared link could not be opened'); return; }
+  const owned=it=> it.catalogId ? !!findByCatalog(it.catalogId) : S.dreams.some(d=>d.title.toLowerCase()===it.title.toLowerCase());
+  openSheet(`
+    <h2 style="font-size:24px;margin-bottom:4px">${data.name?esc(data.name)+'’s':'A shared'} dream list ✨</h2>
+    <p class="sub">Tick the dreams that inspire you. They go into <b>your own</b> list, where you can make each one yours.</p>
+    <div class="row"><button class="btn small" id="inAll">Select all</button><button class="btn small ghost" id="inNone">Select none</button></div>
+    <div class="share-items" id="inList">${data.items.map((it,i)=>{ const have=owned(it); return `
+      <label class="${have?'have':''}"><input type="checkbox" data-i="${i}" ${have?'disabled':'checked'}>
+        <div class="thumb" style="${gvars(it.cat)};width:44px;height:44px;font-size:22px">${esc(it.emoji)}</div>
+        <div style="flex:1;min-width:0"><div style="font-weight:600">${esc(it.title)}</div><div class="note" style="margin:0">${have?'Already in your list':esc(it.desc||CATS[it.cat].name)}</div></div></label>`; }).join('')}
+    </div>
+    <div class="row"><button class="btn grad" id="inAdd">Add to my list</button><button class="btn ghost" id="inClose">Not now</button></div>`, sh=>{
+      const boxes=()=>[...sh.querySelectorAll('#inList input:not(:disabled)')];
+      $('#inAll',sh).onclick=()=>boxes().forEach(b=>b.checked=true);
+      $('#inNone',sh).onclick=()=>boxes().forEach(b=>b.checked=false);
+      $('#inClose',sh).onclick=closeSheet;
+      $('#inAdd',sh).onclick=e=>{
+        let n=0; boxes().filter(b=>b.checked).forEach(b=>{ const it=data.items[+b.dataset.i];
+          if(it.catalogId) addFromCatalog(BY_ID[it.catalogId]); else { S.dreams.unshift(newDream(it)); }
+          n++; });
+        save(); const r=e.target.getBoundingClientRect(); sparkle(r.left+r.width/2,r.top);
+        toast(n?`♥ ${n} dream${n===1?'':'s'} added`:'Nothing selected'); closeSheet(); go('list');
+      };
+    });
+}
+
+// ============ SETTINGS ============
+$('#btnSettings').onclick=()=>{
+  openSheet(`
+    <h2 style="font-size:24px;margin-bottom:10px">Settings</h2>
+    <label class="lbl">Your name</label>
+    <input class="field" id="sName" value="${esc(S.name)}" placeholder="Your name">
+    <label class="lbl">Backup</label>
+    <p class="note" style="margin-top:0">Your dreams live only on this device. Save a backup file now and then (and before switching phones).</p>
+    <div class="row"><button class="btn" id="sExport">⬇︎ Save backup</button><button class="btn" id="sImport">⬆︎ Restore backup</button></div>
+    <label class="lbl">About</label>
+    <p class="note" style="margin-top:0">${CATALOG.length} dream ideas across ${Object.keys(CATS).length-1} categories. Quotes are from public-domain classics plus original affirmations. Add your own favourites in Quotes.</p>
+    <div class="row" style="margin-top:22px;justify-content:space-between"><button class="btn danger small" id="sReset">Erase everything</button><button class="btn primary" id="sDone">Done</button></div>`, sh=>{
+      $('#sName',sh).addEventListener('input',e=>{ S.name=e.target.value.trim(); save(); });
+      $('#sExport',sh).onclick=()=>{
+        const blob=new Blob([JSON.stringify(S,null,1)],{type:'application/json'}); const a=document.createElement('a');
+        a.href=URL.createObjectURL(blob); a.download=`someday-backup-${new Date().toISOString().slice(0,10)}.json`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+      };
+      $('#sImport',sh).onclick=()=>$('#fileImport').click();
+      $('#sReset',sh).onclick=()=>{ if(confirm('Erase all your dreams and quotes? This cannot be undone.')){ S={name:'',dreams:[],myQuotes:[]}; save(); closeSheet(); toast('Fresh start ✨'); } };
+      $('#sDone',sh).onclick=closeSheet;
+    });
+};
+$('#fileImport').addEventListener('change', async e=>{
+  const f=e.target.files[0]; e.target.value=''; if(!f) return;
+  try{ const data=JSON.parse(await f.text()); if(!Array.isArray(data.dreams)) throw 0;
+    if(confirm(`Restore ${data.dreams.length} dreams from this backup? It replaces what is on this device.`)){
+      S={name:data.name||'', dreams:data.dreams, myQuotes:data.myQuotes||[]}; save(); closeSheet(); toast('Backup restored ✓'); }
+  }catch(err){ toast('That file is not a Someday backup'); }
+});
+
+// ============ START ============
+render();
+checkIncomingShare();
+window.addEventListener('hashchange', checkIncomingShare);
+if('serviceWorker' in navigator && /^https?:/.test(location.protocol)) navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
